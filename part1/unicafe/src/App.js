@@ -14,10 +14,11 @@ const Button = ({click, text}) => {
   )
 }
 
-const Stats = ({good,neutral,bad}) =>{
+const Statistics = ({good,neutral,bad}) =>{
  
   const all = good + neutral + bad
-  const positive = ( good / all ) * 100 
+  let positive = ( good / all ) * 100 
+  positive = positive.toFixed(1)
   const average = good * 1 + neutral * 0 + bad * -1
   if (good > 0 || neutral > 0 || bad > 0) {
   return (
@@ -44,8 +45,17 @@ const Result = ({feedback, value}) =>{
   
     if (feedback === 'positive') perc ='%'
     if (feedback !== 'positive') perc =''
+
   return [
-  <p>{feedback}: {count}{perc}</p>
+    <table key={feedback}>
+      <tbody>
+    <tr>
+    {["feedback"].map(item =>
+      <td key={feedback}>{feedback}: {value}{perc}</td>
+    )}
+  </tr>
+  </tbody>
+  </table>
   ]
 }
 
@@ -71,9 +81,9 @@ function App() {
     <div>
     <Header />
     <Button text="good" click={handleGood}/>
-    <Button text="neutral" click={handleNeutral}/>
-    <Button text="bad" click={handleBad}/>
-    <Stats good = {good} neutral = {neutral} bad = {bad} />
+    <Button  text="neutral" click={handleNeutral}/>
+    <Button  text="bad" click={handleBad}/>
+    <Statistics good = {good} neutral = {neutral} bad = {bad} />
     </div>
   )
 }
