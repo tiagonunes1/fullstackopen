@@ -15,11 +15,7 @@ const Button = ({click, text}) => {
 }
 
 const Stats = ({good,neutral,bad}) =>{
-  let perc = ''
-  
-  if (feedback === 'positive') perc ='%'
-  if (feedback !== 'positive') perc =''
-  
+ 
   const all = good + neutral + bad
   const positive = ( good / all ) * 100 
   const average = good * 1 + neutral * 0 + bad * -1
@@ -44,8 +40,12 @@ const Stats = ({good,neutral,bad}) =>{
 }
 
 const Result = ({feedback, value}) =>{
+    let perc = ''
+  
+    if (feedback === 'positive') perc ='%'
+    if (feedback !== 'positive') perc =''
   return [
-  <p>{feedback}: {count}</p>
+  <p>{feedback}: {count}{perc}</p>
   ]
 }
 
