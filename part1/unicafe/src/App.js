@@ -49,9 +49,9 @@ function App() {
     setAll(allClicks + 1 )
     setGood(good + 1)
     setPositive(positive + 1)
-    setPositive((positive*100)/allClicks)
+    setPositive((positive/allClicks)*100)
     console.log(allClicks)
-    console.log((positive*100)/allClicks)
+    console.log(positive)
   }
   const handleNeutral = () => {
     setAll(allClicks + 1)
