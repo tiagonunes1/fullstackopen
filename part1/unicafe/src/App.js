@@ -29,12 +29,12 @@ const Stats = ({good,neutral,bad}) =>{
         <h2>
           statistics
         </h2>
-      <Result count={good} feedback="good" />
-      <Result count={neutral} feedback="neutral" />
-      <Result count={bad} feedback="bad" />
-      <Result count={all} feedback="all" />
-      <Result count={average} feedback="average" />
-      <Result count={positive} feedback="positive" />
+      <Result value={good} feedback="good" />
+      <Result value={neutral} feedback="neutral" />
+      <Result value={bad} feedback="bad" />
+      <Result value={all} feedback="all" />
+      <Result value={average} feedback="average" />
+      <Result value={positive} feedback="positive" />
       </div>
     )
   }
