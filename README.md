@@ -1,5 +1,3 @@
-# Deep Dive Into Modern Web Development
-
 ## Full stack open 2021 Excercise Submissions
 
 - **Part 0: fundamentals of Web apps**
