@@ -27,4 +27,4 @@
 
 - **Part 8: GraphQL**
 
-- **Part 9: Typescript**ls
+- **Part 9: Typescript**
