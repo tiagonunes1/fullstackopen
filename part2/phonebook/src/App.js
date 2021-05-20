@@ -74,8 +74,7 @@ useEffect(hook,[])
       setPersons(persons.concat(returnedPerson))
       setNewName('')
       setNewNumber('')
-       //setNewNotification(`Added ${contactObject.name}`)
-
+      
        setNewNotification(
           {
           text: `Added ${contactObject.name}`,
@@ -108,18 +107,12 @@ useEffect(hook,[])
     const confirmDelete = window.confirm(`Delete ${person.name}?`);
     if (confirmDelete) {
       personService.xdelete(id).then(() => {
-        //Update state --> filter out deleted person
         const filteredP = persons.filter((person) => person.id !== id);
         setPersons(filteredP);
-
-
         setNewNotification({
           text: `${person.name} has been removed from the server!`,
           type: "success"  
         })
-
-
-        // reset filter
         setNewFilter("");
       });
     }
