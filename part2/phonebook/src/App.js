@@ -36,7 +36,6 @@ useEffect(hook,[])
     if (person){
       if (window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`)) { 
         const updatedPerson = {...person, number : newNumber,name : newName};
-        console.log(updatedPerson)
         personService
         .update(person.id,updatedPerson)
         .then((returnedPerson)=>{
@@ -112,12 +111,12 @@ useEffect(hook,[])
         <ul>
           {contactsToShow.map( person => 
              <Persons key={person.id} person={person} onClick={() => {
-              window.confirm(`Delete ${person.name}?`) 
-              ? personService
+              if (window.confirm(`Delete ${person.name}?`))
+               {personService
               .xdelete(person.id)
               .then(() => alert(`${person.name} was deleted!`))
-              .catch((error => console.log(error)))
-              : console.log('canceled')
+              .catch((error => console.log(error)))}
+              
              }}/>
             )}
         </ul>
