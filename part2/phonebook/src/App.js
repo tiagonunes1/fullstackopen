@@ -12,11 +12,6 @@ const hook = () => {
   .getAll()
   .then( intialPersons => {setPersons(intialPersons)})
   .catch((error) => console.log(error))
-  // axios
-  // .get('http://localhost:3002/persons')
-  // .then(result => {
-  //   setPersons(result.data)
-  // })
 }
   
 useEffect(hook,[])
@@ -66,31 +61,7 @@ useEffect(hook,[])
         })
       }
       return
-    }
-
-    // const exists = persons.some(person => person.name === newName && person.number !== newNumber)
-    // alert(exists)
-    //  if (exists){
-    //   window.confirm(`${newName} is already added to phonebook, replace the old number with a new one?`) 
-    //   ? personService
-    //     .update(newNumber)
-    //     .then(() => alert(`${newName} number is now ${newNumber}!`) )
-    //     .catch((error) => console.log(error))
-    //     : console.log('canceled')
-    //     return false
-    // }
-
-
-
-
-    // NOVA VALIDAÇÃO
-
-    // if(persons.some(person => person.name === newName)){
-    //   alert(`${newName} is already added to phonebook`)
-    //     return false
-    // }
-
-  
+    } 
 
     const contactObject = {
       name: newName,
@@ -106,9 +77,7 @@ useEffect(hook,[])
       setNewName('')
       setNewNumber('')
     })
-    .catch((error) => alert(`Error adding contact`) )
-    // setPersons(persons.concat(contactObject))
-    
+    .catch((error) => alert(`Error adding contact`))    
   }
 
   const handleNewContact = (event) => {
@@ -129,7 +98,6 @@ useEffect(hook,[])
   return(
     <div>
       <h1>Phonebook</h1>
-      {/* <div> filter shown with <input  value={newFilter} onChange={handleNewFilter} /></div><br></br> */}
       <Filter value={newFilter} onChange={handleNewFilter} />
       <h2>add new</h2>
       <form onSubmit={ addContact }>
