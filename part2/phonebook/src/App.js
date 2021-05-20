@@ -3,6 +3,7 @@ import Filter from './components/Filter'
 import PersonForm from './components/PersonForm'
 import Persons from './components/Persons'
 import personService from './services/persons'
+import Notification from './components/Notification'
 
 const App = () =>{
   const [ persons, setPersons] = useState([])
@@ -42,16 +43,15 @@ useEffect(hook,[])
           setPersons(persons
           .filter((p) => p.name !== updatedPerson.name)
           .concat(returnedPerson))
-          setNewNotification({
-            text: `${updatedPerson.name} number was updated to ${updatedPerson.number}!`,
-            type: "success"
-          })
+          setNewNotification(
+           `${updatedPerson.name} number was updated to ${updatedPerson.number}!`
+          )
           setTimeout(() => setNewNotification(null),5000)
         })
         .catch((error) =>{
           setPersons(persons.filter((p) => p.name !== person.name));
           setNewNotification({
-            text: `${person.name} was already deleted from the server!`,
+            text: `${person.name} has already been removed from the server!`,
             type: "error"  
           })
           setTimeout(() => {
@@ -71,12 +71,22 @@ useEffect(hook,[])
     personService
     .create(contactObject)
     .then(returnedPerson => {
-      console.log(returnedPerson)
       setPersons(persons.concat(returnedPerson))
       setNewName('')
       setNewNumber('')
+       //setNewNotification(`Added ${contactObject.name}`)
+
+       setNewNotification(
+          {
+          text: `Added ${contactObject.name}`,
+          type: "success"  
+        }
+        )
+
+      setTimeout(() => {
+        setNewNotification(null)
+      }, 5000);
     })
-    .catch((error) => alert(`Error adding contact`))    
   }
 
   const handleNewContact = (event) => {
@@ -93,10 +103,31 @@ useEffect(hook,[])
 
    const contactsToShow = showAll ? persons : persons.filter(person => person.name.toLowerCase() === newFilter.toLowerCase())
    
-  // console.log(contactsToShow)  
+   const handleDelete = (id) => {
+    const person = persons.find((p) => p.id === id);
+    const confirmDelete = window.confirm(`Delete ${person.name}?`);
+    if (confirmDelete) {
+      personService.xdelete(id).then(() => {
+        //Update state --> filter out deleted person
+        const filteredP = persons.filter((person) => person.id !== id);
+        setPersons(filteredP);
+
+
+        setNewNotification({
+          text: `${person.name} has been removed from the server!`,
+          type: "success"  
+        })
+
+
+        // reset filter
+        setNewFilter("");
+      });
+    }
+  };
   return(
     <div>
       <h1>Phonebook</h1>
+      <Notification message={newNotification} />
       <Filter value={newFilter} onChange={handleNewFilter} />
       <h2>add new</h2>
       <form onSubmit={ addContact }>
@@ -110,14 +141,7 @@ useEffect(hook,[])
       <div>
         <ul>
           {contactsToShow.map( person => 
-             <Persons key={person.id} person={person} onClick={() => {
-              if (window.confirm(`Delete ${person.name}?`))
-               {personService
-              .xdelete(person.id)
-              .then(() => alert(`${person.name} was deleted!`))
-              .catch((error => console.log(error)))}
-              
-             }}/>
+             <Persons key={person.id} person={person} onClick={()=> handleDelete(person.id)}/>
             )}
         </ul>
       </div>
