@@ -1,12 +1,7 @@
 require('dotenv').config()
 const http = require('http')
 const express = require('express')
-// const {
-//   response
-// } = require('express')
-// const {
-//   appendFile
-// } = require('fs')
+
 const app = express()
 app.use(express.json())
 var morgan = require('morgan')
@@ -30,15 +25,6 @@ morgan.token('post', function (req) {
 morgan.format('postFormat', ':method :url :status :res[content-length] - :response-time ms :post')
 
 app.use(morgan('postFormat'))
-
-
-// const generateId = () => {
-//   // const maxId = persons.length > 0 ? Math.max(...persons.map(n => n.id)) : 0
-//   const min = Math.min(...persons.map(n => n.id))
-//   const max = Math.max(...persons.map(n => n.id))
-//   const newId = Math.random() * (max - min) + min
-//   return newId
-// }
 
 app.post('/api/persons', (req, res, next) => {
   const body = req.body
@@ -66,11 +52,6 @@ app.post('/api/persons', (req, res, next) => {
     })
     .catch((error) => next(error))
 })
-
-
-// app.get('/', (req, res) => {
-//   res.json(persons)
-// })
 
 app.get('/api/persons', (req, res) => {
   Person.find({}).then(persons => {
@@ -115,14 +96,6 @@ app.put('/api/persons/:id', (req, res, next) => {
       .catch((error) => next(error))
   })
 })
-
-
-// app.get('/info', (req, res) => {
-//   const xdate = new Date()
-//   const html = '<div>Phonebook has info for ' + persons.length + ' people</div><p>' + xdate + '</p>'
-//   res.send(html)
-// })
-
 
 const unknownEndpoint = (request, response) => {
   response.status(404).send({
