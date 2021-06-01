@@ -6,9 +6,7 @@ const app = express()
 app.use(express.json())
 var morgan = require('morgan')
 const Person = require('./models/person')
-// const {  
-//   nextTick
-// } = require('process')
+
 app.use(express.static('build'))
 app.use(express.json())
 
