@@ -105,11 +105,6 @@ useEffect(hook,[])
 
   const handleFilterInputChange = (event) => setNewFilter(event.target.value)
 
-  console.log(newFilter)
-  
-  //  const contactsToShow = showAll ? persons : persons.filter(person => person.name.toLowerCase() === newFilter.toLowerCase())
-
-
    const contactsToShow = persons.filter((person)=> {
      return person.name.toLowerCase().includes(newFilter.toLowerCase())
    })
@@ -128,10 +123,6 @@ useEffect(hook,[])
           text: `${person.name} has been removed from the server!`,
           type: "success"  
         })
-
-
-        // reset filter
-        // setNewFilter("");
       });
     }
   };
