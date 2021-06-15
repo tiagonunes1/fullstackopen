@@ -28,3 +28,7 @@
 - **Part 8: GraphQL**
 
 - **Part 9: Typescript**
+
+- **Part 10: React Native**
+
+- **Part 11: CI/CD**
