@@ -15,7 +15,7 @@
 
 - **Part 3: Programming a server with NodeJS and Express**
 
-  - [Phonebook](https://github.com/tiagonunes1/fullstackopen/tree/main/part3) | [Heroku](https://enigmatic-everglades-33710.herokuapp.com)
+  - [Phonebook](https://github.com/tiagonunes1/fullstackopen/tree/main/part3) | [DEMO](https://enigmatic-everglades-33710.herokuapp.com)
 - **Part 4: Testing Express servers, user administration**
  
 
